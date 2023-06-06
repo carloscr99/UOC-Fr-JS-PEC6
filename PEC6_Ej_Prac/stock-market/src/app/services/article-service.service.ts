@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../article/article-item/Article';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -50,21 +51,23 @@ export class ArticleService {
 
    }
 
-   getArticles() : Article[] {
-    return this.articulos;
+   getArticles() : Observable<Article[]> {
+    return of(this.articulos);
   }
 
-  changeQuantity(articleID: number, changeInQuantity: number): Article {
+  changeQuantity(articleID: number, changeInQuantity: number):Observable<Article> {
     let art = new Article();
     
     art = this.articulos.find(art => art.id === articleID) || new Article();
 
-    return art;
+    return of(art);
   }
 
-  create(article: Article){
+  create(article: Article): Observable<any> {
 
     this.articulos.push(article);
+
+    return of(true)
 
   }
 
