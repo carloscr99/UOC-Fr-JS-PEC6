@@ -60,6 +60,11 @@ export class ArticleService {
     
     art = this.articulos.find(art => art.id === articleID) || new Article();
 
+    art.quantityInCart = changeInQuantity;
+
+    console.log('artículo modificado por observable: ', art);
+
+
     return of(art);
   }
 

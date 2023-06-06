@@ -22,38 +22,35 @@ export class ArticleListComponent implements OnInit {
   }
 
   onArticleChanged(art: ArticleQuantityChange) {
-    console.log("Hola desde el article list");
+    console.log("onArticleChanged ->", art);
     this.articleQuantity = art;
   }
 
   ngOnInit() {
 
 
-    this.articleService.getArticles().subscribe((articles: Article[]) => this.articles = articles)   
-
+    this.articleService.getArticles().subscribe((articles: Article[]) => this.articles = articles);
     
 
   }
 
-  increaseCart(id: number) {
+  // increaseCart(id: number) {
 
-    let art = this.articles.find(item => item.id = id);
+  //   console.log('increaseCart');
 
-    if (art !== undefined)
-      art.quantityInCart++;
+  //   this.articleService.changeQuantity(id, 1);
 
-      console.log('increase from article.list');
+  
+  // }
 
-  }
+  // decreaseCart(id: number) {
 
-  decreaseCart(id: number) {
+  //   let art = this.articles.find(item => item.id = id);
 
-    let art = this.articles.find(item => item.id = id);
+  //   if (art !== undefined)
+  //     art.quantityInCart--;
 
-    if (art !== undefined)
-      art.quantityInCart--;
-
-  }
+  // }
 
 
 

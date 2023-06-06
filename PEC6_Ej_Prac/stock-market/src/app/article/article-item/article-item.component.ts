@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy  } from '@angular/core';
 import { Article } from './Article';
 import { ArticleQuantityChange } from './ArticleQuantityChange';
+import { ArticleService } from 'src/app/services/article-service.service';
 
 @Component({
   selector: 'article-item',
@@ -83,6 +84,7 @@ import { ArticleQuantityChange } from './ArticleQuantityChange';
 export class ArticleItemComponent {
 
   public newArticle: ArticleQuantityChange;
+  articleService: ArticleService = new ArticleService();
 
   @Input() public article!: Article;
 
@@ -102,11 +104,16 @@ export class ArticleItemComponent {
 
     this.newArticle.art = this.article;
 
-    if (action === 'increase')
-      this.newArticle.quantity = this.article.quantityInCart++;
-    else
-      this.newArticle.quantity = this.article.quantityInCart--
+    // if (action === 'increase')
+    //   this.newArticle.quantity = this.article.quantityInCart++;
+    // else
+    //   this.newArticle.quantity = this.article.quantityInCart--
 
+    if (action === 'increase')
+      this.articleService.changeQuantity(this.article.id, this.article.quantityInCart++);
+    else
+      this.articleService.changeQuantity(this.article.id, this.article.quantityInCart--);
+ 
 
     this.articleChanged.emit(this.newArticle);
 
