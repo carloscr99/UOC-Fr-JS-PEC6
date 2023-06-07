@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, ValidationErrors, AbstractControl } from '@angular/forms';
+import { ArticleService } from 'src/app/services/article-service.service';
+import { Article } from '../article-item/Article';
 
 @Component({
   selector: 'article-new-reactive',
@@ -7,6 +9,8 @@ import { FormControl, FormGroup, Validators, FormBuilder, ValidatorFn, Validatio
   styleUrls: ['./article-new-reactive.component.css']
 })
 export class ArticleNewReactiveComponent {
+
+  articleSerive:ArticleService = new ArticleService();
 
   constructor(private fb: FormBuilder) { }
 
@@ -18,7 +22,13 @@ export class ArticleNewReactiveComponent {
 
   onSubmit(){
     if(this.articleForm.valid){
-      console.log("Enhorabuena, el artículo se ha registrado!", this.articleForm.value);
+      let article: Article = new Article();
+
+      article.name = this.articleForm.value.name ?? '';
+      article.price = this.articleForm.value.price ?? 0;
+      article.imageUrl = this.articleForm.value.urlImage ?? '';
+      
+      this.articleSerive.create(article);
     }
     else{
       console.log("El artículo no es válido");

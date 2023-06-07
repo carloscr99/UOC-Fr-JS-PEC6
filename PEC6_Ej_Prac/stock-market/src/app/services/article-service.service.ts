@@ -72,6 +72,8 @@ export class ArticleService {
 
     this.articulos.push(article);
 
+    console.log("artículo creado por article service",this.articulos);
+
     return of(true)
 
   }

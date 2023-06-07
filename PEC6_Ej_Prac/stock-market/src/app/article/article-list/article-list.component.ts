@@ -28,30 +28,9 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
 
-
     this.articleService.getArticles().subscribe((articles: Article[]) => this.articles = articles);
     
-
   }
-
-  // increaseCart(id: number) {
-
-  //   console.log('increaseCart');
-
-  //   this.articleService.changeQuantity(id, 1);
-
   
-  // }
-
-  // decreaseCart(id: number) {
-
-  //   let art = this.articles.find(item => item.id = id);
-
-  //   if (art !== undefined)
-  //     art.quantityInCart--;
-
-  // }
-
-
 
 }

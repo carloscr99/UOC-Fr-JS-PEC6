@@ -104,11 +104,6 @@ export class ArticleItemComponent {
 
     this.newArticle.art = this.article;
 
-    // if (action === 'increase')
-    //   this.newArticle.quantity = this.article.quantityInCart++;
-    // else
-    //   this.newArticle.quantity = this.article.quantityInCart--
-
     if (action === 'increase')
       this.articleService.changeQuantity(this.article.id, this.article.quantityInCart++);
     else
