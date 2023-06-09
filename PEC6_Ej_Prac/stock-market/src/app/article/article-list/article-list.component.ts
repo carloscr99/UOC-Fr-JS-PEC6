@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Article } from '../article-item/Article';
 import { ArticleQuantityChange } from '../article-item/ArticleQuantityChange';
 import { ArticleService } from 'src/app/services/article-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'article-list',
@@ -11,7 +12,7 @@ import { ArticleService } from 'src/app/services/article-service.service';
 export class ArticleListComponent implements OnInit {
 
 
-  articles: Article[] = new Array<Article>();
+  public articles$: Observable<Article[]> = new Observable<Article[]>;
   articleService: ArticleService = new ArticleService();
   public articleQuantity: ArticleQuantityChange;
 
@@ -28,7 +29,7 @@ export class ArticleListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.articleService.getArticles().subscribe((articles: Article[]) => this.articles = articles);
+    this.articles$ = this.articleService.getArticles();
     
   }
 
