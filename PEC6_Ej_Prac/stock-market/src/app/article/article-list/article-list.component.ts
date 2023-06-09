@@ -31,6 +31,6 @@ export class ArticleListComponent implements OnInit {
     this.articleService.getArticles().subscribe((articles: Article[]) => this.articles = articles);
     
   }
-  
+
 
 }

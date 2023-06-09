@@ -12,6 +12,8 @@ export class ArticleNewReactiveComponent {
 
   articleSerive:ArticleService = new ArticleService();
 
+  mensaje = "";
+
   constructor(private fb: FormBuilder) { }
 
    articleForm = this.fb.group({
@@ -27,11 +29,17 @@ export class ArticleNewReactiveComponent {
       article.name = this.articleForm.value.name ?? '';
       article.price = this.articleForm.value.price ?? 0;
       article.imageUrl = this.articleForm.value.urlImage ?? '';
+
+      this.articleSerive.create(article).subscribe((result: any) => {
+
+        this.mensaje = result.msg;
+
+      }, (error => this.mensaje = error.msg));
+
       
-      this.articleSerive.create(article);
     }
     else{
-      console.log("El artículo no es válido");
+      this.mensaje = "El artículo no es válido";
     }
   }
 

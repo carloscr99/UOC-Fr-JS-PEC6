@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../article/article-item/Article';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -74,7 +75,7 @@ export class ArticleService {
 
     console.log("artículo creado por article service",this.articulos);
 
-    return of(true)
+    return throwError({msg: "artículo creado por article service"})
 
   }
 
