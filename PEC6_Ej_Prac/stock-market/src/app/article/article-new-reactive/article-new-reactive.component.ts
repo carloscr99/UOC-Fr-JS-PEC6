@@ -10,11 +10,26 @@ import { Article } from '../article-item/Article';
 })
 export class ArticleNewReactiveComponent {
 
-  articleSerive:ArticleService = new ArticleService();
+  
 
   mensaje = "";
+  public article: Article | undefined;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private articleSerive:ArticleService, private fb: FormBuilder) {
+    this.initializeArticle();
+   }
+
+   initializeArticle(){
+      this.article = {
+        id: 0,
+        name: '',
+        imageUrl: '',
+        price: 0,
+        isOnSale: false,
+        quantityInCart: 0
+      };
+   }
+
 
    articleForm = this.fb.group({
     name: ['', [Validators.required, this.NameArticleValidator(/\b(Prueba|Test|Mock|Fake)\b/i)]],
@@ -24,15 +39,20 @@ export class ArticleNewReactiveComponent {
 
   onSubmit(){
     if(this.articleForm.valid){
-      let article: Article = new Article();
-
-      article.name = this.articleForm.value.name ?? '';
-      article.price = this.articleForm.value.price ?? 0;
-      article.imageUrl = this.articleForm.value.urlImage ?? '';
+    
+      let article: Article = {
+         id: 0,
+         name: this.articleForm.value.name ?? '',
+         price: this.articleForm.value.price ?? 0,
+         imageUrl: this.articleForm.value.urlImage ?? '',
+         isOnSale: true,
+         quantityInCart: 0
+      };
 
       this.articleSerive.create(article).subscribe((result: any) => {
 
         this.mensaje = result.msg;
+        this.initializeArticle();
 
       }, (error => this.mensaje = error.msg));
 

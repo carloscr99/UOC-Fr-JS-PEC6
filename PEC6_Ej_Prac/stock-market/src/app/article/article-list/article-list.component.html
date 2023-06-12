@@ -1,7 +1,6 @@
 
 <div *ngFor="let article of articles$ | async">
 
-    <article-item [article]="article"
-     (articleChanged)="onArticleChanged($event)"></article-item>
+    <article-item [article]="article"></article-item>
 
 </div>

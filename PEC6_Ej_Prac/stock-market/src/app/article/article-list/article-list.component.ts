@@ -13,19 +13,13 @@ export class ArticleListComponent implements OnInit {
 
 
   public articles$: Observable<Article[]> = new Observable<Article[]>;
-  articleService: ArticleService = new ArticleService();
-  public articleQuantity: ArticleQuantityChange;
 
-  constructor() {
 
-    this.articleQuantity = new ArticleQuantityChange();
+  constructor(private articleService: ArticleService) {
+
 
   }
 
-  onArticleChanged(art: ArticleQuantityChange) {
-    console.log("onArticleChanged ->", art);
-    this.articleQuantity = art;
-  }
 
   ngOnInit() {
 

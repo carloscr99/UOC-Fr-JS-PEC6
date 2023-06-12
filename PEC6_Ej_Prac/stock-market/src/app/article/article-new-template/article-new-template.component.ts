@@ -14,7 +14,14 @@ export class ArticleNewTemplateComponent {
  
 
   constructor(){
-    this.articulo = new Article();
+    this.articulo = {
+      id: 0,
+      name: '',
+      price: 0,
+      imageUrl: '',
+      isOnSale: true,
+      quantityInCart: 0
+    };
   }
 
   createArticle(article: NgForm){

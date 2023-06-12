@@ -84,14 +84,13 @@ import { ArticleService } from 'src/app/services/article-service.service';
 export class ArticleItemComponent {
 
   public newArticle: ArticleQuantityChange;
-  articleService: ArticleService = new ArticleService();
 
   @Input() public article!: Article;
 
   @Output() private articleChanged!: EventEmitter<ArticleQuantityChange>;
 
 
-  constructor() {
+  constructor(private articleService: ArticleService ) {
 
     this.newArticle = new ArticleQuantityChange();
 
@@ -105,9 +104,9 @@ export class ArticleItemComponent {
     this.newArticle.art = this.article;
 
     if (action === 'increase')
-      this.articleService.changeQuantity(this.article.id, this.article.quantityInCart++);
+      this.articleService.changeQuantity(this.article);
     else
-      this.articleService.changeQuantity(this.article.id, this.article.quantityInCart--);
+      this.articleService.changeQuantity(this.article);
  
 
     this.articleChanged.emit(this.newArticle);
