@@ -54,8 +54,8 @@ export class ArticleService {
 
    }
 
-   getArticles() : Observable<Article[]> {
-    return this.http.get<Article[]>('/api/articles');
+   getArticles(query: string) : Observable<Article[]> {
+    return this.http.get<Article[]>(`/api/articles?q=${query}`);
   }
 
   changeQuantity(article: Article, operation: number):Observable<Article> {
