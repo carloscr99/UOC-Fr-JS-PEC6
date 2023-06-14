@@ -103,10 +103,34 @@ export class ArticleItemComponent {
 
     this.newArticle.art = this.article;
 
-    if (action === 'increase')
-      this.articleService.changeQuantity(this.article);
-    else
-      this.articleService.changeQuantity(this.article);
+    if (action === 'increase'){
+      this.article.quantityInCart++;
+      this.articleService.changeQuantity(this.article, 1).subscribe(
+        (val) => {
+            console.log("PATCH call successful value returned in body", 
+                        val);
+        },
+        response => {
+            console.log("PATCH call in error", response);
+        },
+        () => {
+            console.log("The PATCH observable is now completed.");
+        });;
+    }
+    else{
+      this.article.quantityInCart--;
+      this.articleService.changeQuantity(this.article, -1).subscribe(
+        (val) => {
+            console.log("PATCH call successful value returned in body", 
+                        val);
+        },
+        response => {
+            console.log("PATCH call in error", response);
+        },
+        () => {
+            console.log("The PATCH observable is now completed.");
+        });;
+    }
  
 
     this.articleChanged.emit(this.newArticle);

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Article } from '../article/article-item/Article';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
@@ -58,9 +58,14 @@ export class ArticleService {
     return this.http.get<Article[]>('/api/articles');
   }
 
-  changeQuantity(article: Article):Observable<Article> {
+  changeQuantity(article: Article, operation: number):Observable<Article> {
+
+    console.log("changeQuantity article-service -> " + article.quantityInCart);
    
-    return this.http.patch<Article>('api/articles/'+ article.id, article);
+    return this.http.patch<Article>('api/articles/'+ article.id,  {
+      changeInQuantity: operation
+      
+    });
     
   }
 
