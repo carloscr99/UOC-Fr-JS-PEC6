@@ -10,14 +10,14 @@ import { ArticleService } from 'src/app/services/article-service.service';
 
     <div class="article" [ngStyle]="{'background-color': article.isOnSale ? 'transparet' : 'rgb(255 173 154)'}">
         <div class="row">
-            <img src={{article.imageUrl}} style="width: 20vw;">
+            <img [src]="article.imageUrl | imageUrl" style="width: 20vw;" />
         </div>
         <div class="row">
             <div class="col">
                 <label>{{article.name}}</label>
             </div>
             <div class="col">
-                <label [ngClass]="article.isOnSale ? '' : 'outOfStock'">{{article.price}}</label>
+                <label [ngClass]="article.isOnSale ? '' : 'outOfStock'">{{article.price |  currency: 'EUR' }}</label>
             </div>
         </div>
         <div *ngIf="article.isOnSale" class="row buttons">
@@ -108,7 +108,7 @@ export class ArticleItemComponent {
       this.articleService.changeQuantity(this.article, 1).subscribe(
         (val) => {
             console.log("PATCH call successful value returned in body", 
-                        val);
+                        val); 
         },
         response => {
             console.log("PATCH call in error", response);
